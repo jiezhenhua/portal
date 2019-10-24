@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd 
+       ">
+  
+	<!-- 加载db.properties文件中的内容 -->
+	<context:property-placeholder location="classpath:config/properties/mysql.properties" />   
+	  
+	<!-- 配置数据源，-->
+	<bean id="dataSource-portal" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+        <property name="driverClassName" value="${portal.jdbc.driver}" />
+        <property name="url" value="${portal.jdbc.url}" />
+        <property name="username" value="${portal.jdbc.uname}" />
+        <property name="password" value="${portal.jdbc.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${portal.jdbc.initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${portal.jdbc.maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${portal.jdbc.maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${portal.jdbc.minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${portal.jdbc.maxWait}"></property>
+		<!-- 
+        <property name="driverClassName" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <property name="initialSize" value="${initialSize}"></property>
+        <property name="maxActive" value="${maxActive}"></property>
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <property name="minIdle" value="${minIdle}"></property>
+        <property name="maxWait" value="${maxWait}"></property>
+         -->
+	</bean>
+	<!-- 配置数据源，-->
+	<bean id="dataSource-emp" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+        <property name="driverClassName" value="${emp.jdbc.driver}" />
+        <property name="url" value="${emp.jdbc.url}" />
+        <property name="username" value="${emp.jdbc.uname}" />
+        <property name="password" value="${emp.jdbc.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${emp.jdbc.initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${emp.jdbc.maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${emp.jdbc.maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${emp.jdbc.minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${emp.jdbc.maxWait}"></property>
+	</bean>
+	<!-- 数据源：Spring用来控制业务逻辑。数据源、事务控制、aop -->
+     <bean id="dataSource" class="com.zhjie.common.dataSource.DynamicDataSource">
+         <property name="targetDataSources">
+             <map key-type="java.lang.String">
+                 <entry key="dataSource-portal" value-ref="dataSource-portal"></entry>
+                 <entry key="dataSource-emp" value-ref="dataSource-emp"></entry>
+             </map>
+         </property>
+         <!-- 默认目标数据源为你主库数据源 -->
+         <property name="defaultTargetDataSource" ref="dataSource-portal"/>
+     </bean>
+	<!-- 配置sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" /><!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+		<property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml" /><!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+		<property name="configLocation" value="classpath:config/xml/mybatis-config.xml"/>
+	</bean>
+
+	<!-- 定义SqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+	<!-- SqlSession：用于执行持久化操作的对象，类似于jdbc中的Connection。  -->
+	<!-- SqlSessionFactory：创建SqlSession实例的工厂 -->
+	<!-- SqlSessionFactoryBuilder：build方法创建SqlSessionFactory实例。 -->
+	<!-- SqlSessionTemplate：MyBatis提供的持久层访问模板化的工具，线程安全，可通过构造参数或依赖注入SqlSessionFactory实例。 -->
+	
+	
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd 
+       ">
+  
+  	<!-- mapper扫描配置扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描com.zhjie.emp.dao这个包以及它的子包下的所有映射接口类 -->
+		<property name="basePackage" value="com.zhjie.emp.dao,com.zhjie.portal.dao" />  <!--此处必须精确到dao  -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  <!-- 如果报错Invalid bound statement (not found): 请参考:  https://my.oschina.net/psuyun/blog/464851 -->
+	</bean>     
+	
+</beans>

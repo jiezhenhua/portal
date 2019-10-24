@@ -1,0 +1,60 @@
+.cellphonedel{
+	height: 30px;
+}
+.showMessage{
+	color: red;
+	margin-left: 10px;
+}
+*{padding:0px;margin:0px;}
+	ul li {cursor:pointer;
+		   float:left;
+		   width:250px;
+		   height:30px;
+		   line-height:30px;
+		   text-align:left;
+		   background-color:#fff;
+		   border:1px #bbb solid;
+		   border-bottom:none;
+		   }
+	ul li.fli {background-color:#ccc;color:red;}
+	ul {overflow:hidden;list-style:none;}
+	#tab_con {width:760px;min-height:510px;overflow-y:auto;max-height:510px;}
+	#tab_con div{
+				 display:none;
+				 border-top:none;
+				 text-align:center;
+				 }
+	#tab_con div.fdiv {display:block;
+					   }
+	div:not(#tab_con){padding:20px 0px;color:black;}
+
+/* .wrap div{
+        width: 300px;
+        height: 300px;
+        background-color: #0cc;
+    }
+.active{
+    background-color: red
+} */
+
+.black_overlay{
+display: none;
+position: absolute;
+top: 0%;
+left: 0%;
+width: 100%;
+height: 100%;
+background-color: gray;
+z-index:1001;
+-moz-opacity: 0.8;
+opacity:.20;
+filter: alpha(opacity=80);
+}
+.white_content {
+display: none;
+position: absolute;
+top: 50%;
+left: 45%;
+z-index:1002;
+overflow: auto;
+}

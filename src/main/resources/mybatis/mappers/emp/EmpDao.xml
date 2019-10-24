@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhjie.emp.dao.EmpDao">
+
+	<resultMap id="EmpResultMap" type="com.zhjie.emp.entity.Emp">
+		<id column="empno" property="empno" jdbcType="DOUBLE" />
+		<result column="ename" property="ename" jdbcType="VARCHAR" />
+		<result column="job" property="job" jdbcType="VARCHAR" />
+		<result column="mgr" property="mgr" jdbcType="INTEGER" />
+		<result column="hiredate" property="hiredate" jdbcType="DATE" />
+		<result column="sal" property="sal" jdbcType="DOUBLE" />
+		<result column="comm" property="comm" jdbcType="DOUBLE" />
+		<result column="deptno" property="deptno" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<!-- CREATE SEQUENCE seqTest ; INCREMENT BY 1 每次加几个 ;START WITH 1 从1开始计数 
+		; NOMAXvalue 不设置最大值 ; NOCYCLE 一直累加，不循环 ; CACHE 10 缓存 10 ; - -->
+	<!-- CREATE SEQUENCE seqEmp INCREMENT BY 1 START WITH 1000 NOMAXvalue NOCYCLE 
+		CACHE 10 -->
+
+	<!-- 新增emp -->
+	<insert id="addEmp" useGeneratedKeys="true" keyProperty="empno" parameterType="com.zhjie.emp.entity.Emp"> <!-- insert 元素 没有 resultType 属性: http://blog.csdn.net/a281246240/article/details/53463620 -->
+		insert into t_emp_info (ename,job,mgr,hiredate,sal,comm,deptno)
+		values(#{ename,jdbcType=VARCHAR},#{job,jdbcType=VARCHAR},#{mgr,jdbcType=INTEGER},#{hiredate,jdbcType=DATE},#{sal,jdbcType=DOUBLE},#{comm,jdbcType=DOUBLE},#{deptno,jdbcType=DOUBLE})
+	</insert>
+
+	<!-- 删除emp -->
+	<delete id="deleteEmp" parameterType="com.zhjie.emp.entity.Emp">
+		delete from t_emp_info where empno = #{empno}
+	</delete>
+
+	<!-- 修改emp -->
+	<update id="updateEmp" parameterType="com.zhjie.emp.entity.Emp">
+		update t_emp_info
+		<set>
+			<if test="ename != null and  ename != ''">
+				ename = #{ename},
+			</if>
+			<if test="job != null and job != ''">
+				job = #{job},
+			</if>
+			<if test="mgr != null and mgr != ''">
+				mgr = #{mgr},
+			</if>
+			<if test="hiredate != null ">
+				hiredate = #{hiredate},
+			</if>
+			<if test="sal != null and sal != ''">
+				sal = #{sal},
+			</if>
+			<if test="comm != null and comm != ''">
+				comm = #{comm},
+			</if>
+			<if test="deptno != null and deptno != ''">
+				deptno = #{deptno}
+			</if>
+		</set>
+		where empno = #{empno}
+	</update>
+
+	<!-- 查看所有的Emp -->
+	<select id="getEmps" parameterType="com.zhjie.emp.entity.Emp"
+		resultMap="EmpResultMap">
+		select * from t_emp_info where 1 = 1
+		<if test="empno != null and empno != ''">
+			and  instr(empno,#{empno}) > 0  
+		</if>
+		<if test="ename != null and  ename != ''">
+			and  instr(ename,#{ename}) > 0  
+		</if>
+		<if test="job != null and job != ''">
+			and  instr(job,#{job}) > 0 
+		</if>
+		<if test="mgr != null and mgr != ''">
+			and  instr(mgr,#{mgr}) > 0 
+		</if>
+		<if test="hiredate != null and hiredate != ''">
+			and hiredate = #{hiredate}  
+		</if>
+		<if test="sal != null and sal != ''">
+			and  instr(sal,#{sal}) > 0  
+		</if>
+		<if test="comm != null and comm != ''">
+			and  instr(comm,#{comm}) > 0  
+		</if>
+		<if test="deptno != null and deptno != ''">
+			and  instr(deptno,#{deptno}) > 0  
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd 
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd 
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       ">
+     <!--  上面 虽然没有标注版本号 ; 但spring可以自动配置最合适的版本号  -->  
+
+	<!-- 采用注释的方式配置bean -->
+	<context:annotation-config />
+	<!-- 自动扫描注解 -->
+	<context:component-scan base-package="com.zhjie" />
+	
+	<!--导入DAO配置  -->
+	<import resource="mybatis-dao.xml"/>
+	<!--导入数据库配置  -->
+	<import resource="mybatis-db.xml"/>
+	<!--导入数据库事务配置  -->
+	<import resource="spring-tx.xml"/>
+
+
+</beans>

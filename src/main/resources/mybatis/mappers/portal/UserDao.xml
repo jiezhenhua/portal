@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhjie.portal.dao.UserDao">
+
+	<resultMap id="UserResultMap" type="com.zhjie.portal.entity.User">
+		<id column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- CREATE SEQUENCE seqTest ; INCREMENT BY 1 每次加几个 ;START WITH 1 从1开始计数 
+		; NOMAXvalue 不设置最大值 ; NOCYCLE 一直累加，不循环 ; CACHE 10 缓存 10 ; - -->
+	<!-- CREATE SEQUENCE seqEmp INCREMENT BY 1 START WITH 1000 NOMAXvalue NOCYCLE 
+		CACHE 10 -->
+
+	<!-- 新增 -->
+	<!-- <insert id="add" parameterType="com.zhjie.portal.dao.UserDao"> insert 元素 没有 resultType 属性: http://blog.csdn.net/a281246240/article/details/53463620
+		insert into t_portal_user (userid,username,password)
+		values(#{userid,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR,#{password,jdbcType=VARCHAR})
+	</insert>
+
+	删除
+	<delete id="delete" parameterType="com.zhjie.portal.dao.UserDao">
+		delete from t_portal_user where ${key} = #{value}
+	</delete>
+
+	修改
+	<update id="update" parameterType="com.zhjie.portal.dao.UserDao">
+		update t_portal_user
+		<set>
+			<if test="username != null and  username != ''">
+				username = #{username},
+			</if>
+		</set>
+		where userid = #{userid}
+	</update> -->
+
+	<!-- 查看 -->
+	<select id="select" parameterType="java.lang.String"
+		resultMap="UserResultMap">
+		select * from t_portal_user where 1 = 1
+			and  ${key} =#{value}  
+	</select>
+
+</mapper>
