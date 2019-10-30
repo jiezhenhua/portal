@@ -35,6 +35,12 @@
 									ajaxOptions:{
 								        headers: {"accessToken": localStorage.accessToken}
 								    },
+								    onLoadSuccess: function () {
+								    	alertModal('消息:','数据加成功!');
+							        },
+								    onLoadError: function (xhr, status) {
+								    	alertModal('注意:','数据加载失败!');
+							        },
 									columns : [
 											{
 												checkbox : true

@@ -8,7 +8,7 @@
 	String ithenticateHomePagePath = basePath+"ithenticate/ithenticateHome/portal";
 	String cellPhonmePath = basePath+"cellphone/cellPhoneHome/portal";
 	String amusementHomePath = basePath+"amusement/amusementHome/portal";
-	String knowledgeHomePath = basePath+"knowledge/knowledgeHome/portal";
+	String knowledgeHomePath = basePath+"knowledge/home/portal";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

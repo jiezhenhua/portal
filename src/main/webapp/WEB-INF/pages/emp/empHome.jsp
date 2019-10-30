@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String empHomePagePath = basePath + "emp/empHome";
-	String homePagePath = basePath+"welcome/content";
+	String homePagePath = basePath+"welcome/content/portal";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -26,7 +26,6 @@
 	href="static/common/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
 </head>
 <body>
-	<div id="turnback" v-on:click="turnback('<%=homePagePath %>')">返回</div>
 	<div class="panel-body" style="padding-bottom: 0px;">
 		<div class="panel panel-primary">  <!-- 查询条件 div  start -->
 			<div class="panel-heading">查询条件</div>

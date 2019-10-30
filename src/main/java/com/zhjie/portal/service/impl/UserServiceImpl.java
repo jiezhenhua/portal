@@ -3,10 +3,12 @@ package com.zhjie.portal.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhjie.common.datasource.DataSource;
 import com.zhjie.portal.dao.UserDao;
 import com.zhjie.portal.entity.User;
 import com.zhjie.portal.service.UserService;
 @Service
+@DataSource(name = DataSource.PORTAL)
 public class UserServiceImpl implements UserService {
 
 	@Autowired

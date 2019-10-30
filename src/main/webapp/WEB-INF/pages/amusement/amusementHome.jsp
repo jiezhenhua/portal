@@ -42,6 +42,7 @@
 <script type="text/javascript" src="static/common/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript" src="static/common/jquery/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="static/common/jquery/jquery-ui-timepicker-zh-CN.js"></script>
+<script type="text/javascript" src="static/portal/ajax.js"></script>
 <script type="text/javascript">
 //初始化
 jQuery(function () {

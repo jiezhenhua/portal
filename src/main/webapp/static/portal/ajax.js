@@ -28,8 +28,15 @@ var HttpRequest = function (options) {
     success: function (res) {
       o.success && o.success(res);
     },
-    complete: function () {
-      o.complete && o.complete();
+    complete: function (xhr, status) {
+      //拦截器拦截没有权限跳转
+      // 通过xhr取得响应头
+      var REDIRECT = xhr.getResponseHeader("REDIRECT");
+      //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+      if (REDIRECT == "REDIRECT")
+      {
+    	  window.location.href = xhr.getResponseHeader("CONTENTPATH");
+      }
     }
   });
 };

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhjie.common.dataSource.TargetDataSource;
+import com.zhjie.common.datasource.DataSource;
 import com.zhjie.emp.dao.EmpDao;
 import com.zhjie.emp.entity.Emp;
 import com.zhjie.emp.service.EmpService;
@@ -13,7 +13,7 @@ import com.zhjie.emp.service.EmpService;
 
 
 @Service
-@TargetDataSource(name = TargetDataSource.EMP)
+@DataSource(name = DataSource.EMP)
 public class EmpServeiceImpl implements EmpService {
 
 	@Autowired

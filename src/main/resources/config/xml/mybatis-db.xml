@@ -11,7 +11,7 @@
 	<context:property-placeholder location="classpath:config/properties/mysql.properties" />   
 	  
 	<!-- 配置数据源，-->
-	<bean id="dataSource-portal" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSourcePortal" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
         <property name="driverClassName" value="${portal.jdbc.driver}" />
         <property name="url" value="${portal.jdbc.url}" />
@@ -40,7 +40,7 @@
          -->
 	</bean>
 	<!-- 配置数据源，-->
-	<bean id="dataSource-emp" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSourceEmp" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
         <property name="driverClassName" value="${emp.jdbc.driver}" />
         <property name="url" value="${emp.jdbc.url}" />
@@ -58,15 +58,15 @@
         <property name="maxWait" value="${emp.jdbc.maxWait}"></property>
 	</bean>
 	<!-- 数据源：Spring用来控制业务逻辑。数据源、事务控制、aop -->
-     <bean id="dataSource" class="com.zhjie.common.dataSource.DynamicDataSource">
+     <bean id="dataSource" class="com.zhjie.common.datasource.DynamicDataSource">
          <property name="targetDataSources">
              <map key-type="java.lang.String">
-                 <entry key="dataSource-portal" value-ref="dataSource-portal"></entry>
-                 <entry key="dataSource-emp" value-ref="dataSource-emp"></entry>
+                 <entry key="dataSourcePortal" value-ref="dataSourcePortal"></entry>
+                 <entry key="dataSourceEmp" value-ref="dataSourceEmp"></entry>
              </map>
          </property>
          <!-- 默认目标数据源为你主库数据源 -->
-         <property name="defaultTargetDataSource" ref="dataSource-portal"/>
+         <property name="defaultTargetDataSource" ref="dataSourcePortal"/>
      </bean>
 	<!-- 配置sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -74,7 +74,9 @@
 		<property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml" /><!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
 		<property name="configLocation" value="classpath:config/xml/mybatis-config.xml"/>
 	</bean>
-
+	
+	<bean id="dataSourceExchange" class="com.zhjie.common.datasource.DataSourceExchange"/>
+	
 	<!-- 定义SqlSessionTemplate -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>

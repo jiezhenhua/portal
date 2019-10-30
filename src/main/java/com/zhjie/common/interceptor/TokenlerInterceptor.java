@@ -26,13 +26,33 @@ public class TokenlerInterceptor implements HandlerInterceptor{
 			if(result){
 				return true;
 			}else{
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				System.out.println("token验证失败，返回登录！");
+				//如果request.getHeader("X-Requested-With") 返回的是"XMLHttpRequest"说明就是ajax请求，需要特殊处理 否则直接重定向就可以了
+	            if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))){
+	                //告诉ajax我是重定向
+	                response.setHeader("REDIRECT", "REDIRECT");
+	                //告诉ajax我重定向的路径
+	                response.setHeader("CONTENTPATH", request.getContextPath()+"/login/login/portal");
+	                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+	            }else{
+	                response.sendRedirect(request.getContextPath()+"/login/login/portal");
+	            }
+	            return false;
 			}
 		}else{
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			System.out.println("token为空，返回登录！");
+			//如果request.getHeader("X-Requested-With") 返回的是"XMLHttpRequest"说明就是ajax请求，需要特殊处理 否则直接重定向就可以了
+            if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))){
+                //告诉ajax我是重定向
+                response.setHeader("REDIRECT", "REDIRECT");
+                //告诉ajax我重定向的路径
+                response.setHeader("CONTENTPATH", request.getContextPath()+"/login/login/portal");
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            }else{
+                response.sendRedirect(request.getContextPath()+"/login/login/portal");
+            }
 			return false;
 		}
-		return false;
 	}
 
 	@Override

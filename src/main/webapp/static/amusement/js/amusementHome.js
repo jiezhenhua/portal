@@ -49,7 +49,7 @@ var doSend = new Vue({
 				 return;
 			}
 			var param = {hbSumMoney:hbSumMoney,hbCount:hbCount,personArr:personArr};
-			$.ajax({
+			ajaxHttp({
 				url:"amusement/doSendHb",
 		     	type:"post",
 		     	contentType : "application/json",

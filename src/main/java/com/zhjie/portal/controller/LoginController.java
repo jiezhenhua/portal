@@ -94,4 +94,11 @@ public class LoginController {
 		j.setData(publicKey);
 		return j;
 	}
+	
+
+	//  跳转页面
+	@RequestMapping("/login/portal")
+    public String portalLogin(){
+        return "../../index";
+    }
 }

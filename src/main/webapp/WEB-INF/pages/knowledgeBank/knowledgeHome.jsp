@@ -6,7 +6,8 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String contentPagePath = basePath + "ithenticate/ithenticateContent";
-	String maintainPath = basePath+"knowledge/maintain/portal";
+	String maintainPath = basePath+"maintain/maintain/portal";
+	String knowledgeAddPath = basePath+"maintain/knowledgeAdd/portal";
 %>
 <html>
 <head>
@@ -16,7 +17,8 @@
 </head>
 <body>
 <div>
-<div id="maintain" v-on:click="doMaintain(<%=maintainPath%>)">题目维护</div>
+<div id="maintain" v-on:click="doMaintain('<%=maintainPath%>')">题目维护</div>
+<div id="knowledgeadd" v-on:click="doKnowledgeAdd('<%=knowledgeAddPath%>')">新增</div>
 <div>学习</div>
 <div>答题</div>
 </div>
