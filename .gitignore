@@ -1,0 +1,6 @@
+src/main/webapp/WEB-INF/classes/
+target/classes/rebel.xml
+target/classes/
+target/test-classes/
+target/
+.settings/
