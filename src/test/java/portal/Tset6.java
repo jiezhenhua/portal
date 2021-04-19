@@ -1,5 +1,7 @@
 package portal;
 
+import java.util.Map;
+
 public class Tset6 {
 	public static void main(String[] args) {
 		for (long i = 0; i < 10; i++) {
@@ -9,7 +11,7 @@ public class Tset6 {
 	}
 
 	public static void randomPackage() {
-		long total_money = 1000;
+		long total_money = 290000;
 		long total_people = 3;
 		long min_money = 33; // 每个人最少能收到0.05元、
 		long max_money = 934; // 每个人最少能收到0.2元、
@@ -17,7 +19,6 @@ public class Tset6 {
 		for (long i = 0; i < total_people; i++) {
 			// 保护值
 			long procte = (total_people - i - 1) * min_money;
-			;
 			// 可支配金额
 			long zpje = total_money - procte;
 			if (zpje < max_money) {
